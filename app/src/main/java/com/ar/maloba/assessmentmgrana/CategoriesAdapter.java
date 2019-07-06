@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ar.maloba.assessmentmgrana.repository.remote.model.Category;
+
+import java.util.ArrayList;
+
 /**
  * Created by Ezequiel Maloberti on 6/7/2019.
  */
@@ -16,10 +20,10 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     private static final String TAG = CategoriesAdapter.class.getSimpleName();
 
-    private int mNumberItems;
+    private ArrayList<Category> mCategories;
 
-    public CategoriesAdapter(int numberOfItems) {
-        mNumberItems = numberOfItems;
+    public CategoriesAdapter(@NonNull MainActivity mainActivity,@NonNull ArrayList<Category> categories) {
+        mCategories = categories;
     }
 
     @NonNull
@@ -44,22 +48,21 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     @Override
     public int getItemCount() {
-        return mNumberItems;
+        return mCategories.size();
     }
 
     class CategoryViewHolder extends RecyclerView.ViewHolder {
 
-        // Will display the position in the list, ie 0 through getItemCount() - 1
-        TextView listItemNumberView;
+        TextView listItemView;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            listItemNumberView = (TextView) itemView.findViewById(R.id.tv_item_category);
+            listItemView = (TextView) itemView.findViewById(R.id.tv_item_category);
         }
 
         void bind(int listIndex) {
-            listItemNumberView.setText(String.valueOf(listIndex));
+            Category cat = mCategories.get(listIndex);
+            listItemView.setText(cat != null ? cat.getName() : " --- ");
         }
     }
 }
