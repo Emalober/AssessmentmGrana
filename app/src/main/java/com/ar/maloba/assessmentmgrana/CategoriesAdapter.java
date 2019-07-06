@@ -62,7 +62,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
         void bind(int listIndex) {
             Category cat = mCategories.get(listIndex);
-            listItemView.setText(cat != null ? cat.getName() : " --- ");
+            listItemView.setText(cat != null ? cat.name() : " --- ");
         }
     }
 }

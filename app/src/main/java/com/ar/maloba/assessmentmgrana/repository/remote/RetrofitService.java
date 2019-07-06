@@ -1,6 +1,7 @@
 package com.ar.maloba.assessmentmgrana.repository.remote;
 
 import com.ar.maloba.assessmentmgrana.repository.remote.api.MercadoLibreApi;
+import com.google.gson.GsonBuilder;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -24,10 +25,14 @@ public class RetrofitService {
 
         String baseUrl = "https://api.mercadolibre.com/";
 
+        GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(
+                new GsonBuilder().registerTypeAdapterFactory(AutoValueGsonFactory.create())
+                        .create());
+
         if (mRetrofit == null) {
             mRetrofit = new Retrofit.Builder()
                     .baseUrl(baseUrl)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(gsonConverterFactory)
                     .client(httpClient.build())
                     .build();
         }

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mConfigViewModel = ViewModelProviders.of(this).get(ConfigViewModel.class);
         mConfigViewModel.init();
         mConfigViewModel.getMLRepository().observe(this, configResponse -> {
-            List<Category> categories = configResponse.getCategories();
+            List<Category> categories = configResponse.categories();
             mCategories.clear();
             mCategories.addAll(categories);
             mAdapter.notifyDataSetChanged();
